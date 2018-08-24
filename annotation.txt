@@ -1,0 +1,11 @@
+### O que é necessário para desenvolver a app  com typescript
+
+    - Instalar o typescript de forma global de preferência.
+    - Importante ressaltar que o vscode tem suporte ao typescript, mas não possui o compilador, sendo assim é necessário instalar o typescript.
+    - Necessário criar o arquivo tsconfig.json, na qual vai conter as propriedades referente ao ts, bem como a indicação do diretório que vai ficar os arquivos .js gerados.
+
+### Para rodar a aplicação
+
+    - Pelo fato do node não executar o ts diretamente e sim os arquivos .js resultantes da compilação feita pelo compilador do ts para executar a aplicação é necessário indicar o o arquivo principal compilado, ou seja, o .js
+    - Para que não seja necessário executar o comando de compilação todas as vezes que os arquivos .ts forem alterados pode ser executado o comando tsc -w, que ficará ouvindo e fazendo as compilações toda vez que um arquivo for alterado.
+    - Se quisér ainda rodar a aplicação e sempre manter ela rodando e atualizando sempre que um arquivo for alterado, é necessário instalar o nodemon, e executar a aplicação com ele. ex: nodemon <path do arquivo compilado>
