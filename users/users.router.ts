@@ -11,4 +11,17 @@ routerInstance.get('/users', (req, res, next) => {
         })
 });
 
+routerInstance.get('users/:id', (req, res, next) => {
+    
+    User.findById(req.params.id)
+        .then(user => {
+            if (user) {
+                res.json(user);
+                return next();
+            }
+            res.send(404);
+            return next();
+        })
+})
+
 export default routerInstance;
