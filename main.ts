@@ -1,17 +1,15 @@
-import * as restify from 'restify';
+import {Server} from './server/server';
+import userRouter from './users/users.router';
 
-const server = restify.createServer({
-    name: 'meat-api',
-    version: '1.0.0'
-});
+const server = new Server();
+server.bootstrap([userRouter])
+    .then(server => {
+        console.log('Server is listening on:', server.application.address())
+    })
+    .catch(error => {
+        console.log('Serve failed to start')
+        console.log(error)
+        process.exit(1)
+    });
 
-server.get('/hello', (req, resp, next) => {
-    resp.json({message: 'Hello'});
-    console.log('Excuting /hello route!');
-    return next();
-});
 
-
-server.listen(3000, () => {
-    console.log('meat-api started on 3000');
-})
