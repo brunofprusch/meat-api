@@ -9,10 +9,12 @@
   "author": "Bruno Feldmann Prusch",
   "license": "ISC",
   "dependencies": {
+    "mongoose": "4.13.9",
     "restify": "6.3.4",
     "restify-router": "^0.5.0"
   },
   "devDependencies": {
+    "@types/mongoose": "4.7.32",
     "@types/restify": "5.0.6"
   }
 }

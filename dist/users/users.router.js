@@ -4,7 +4,7 @@ const restify_router_1 = require("restify-router");
 const routerInstance = new restify_router_1.Router();
 const users_model_1 = require("./users.model");
 routerInstance.get('/users', (req, res, next) => {
-    users_model_1.User.findAll()
+    users_model_1.User.find()
         .then(users => {
         res.json(users);
         return next();

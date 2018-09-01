@@ -4,7 +4,7 @@ import {User} from './users.model';
 
 routerInstance.get('/users', (req, res, next) => {
 
-    User.findAll()
+    User.find()
         .then(users => {
             res.json(users);
             return next();

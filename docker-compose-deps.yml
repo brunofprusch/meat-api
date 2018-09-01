@@ -1,0 +1,11 @@
+version: '2.1'
+services:
+  mongodb:
+    image: mongo:latest
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    command: mongod --smallfiles --logpath=/dev/null
+    network_mode: host
+    extra_hosts:
+      - "moby:127.0.0.1"
