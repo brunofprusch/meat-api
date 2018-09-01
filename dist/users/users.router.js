@@ -2,10 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const restify_router_1 = require("restify-router");
 const routerInstance = new restify_router_1.Router();
-// const Router = require('restify-router').Router,
-//       routerInstance = new Router();
+const users_model_1 = require("./users.model");
 routerInstance.get('/users', (req, res, next) => {
-    res.json({ message: 'Vai retornar os usuários' });
-    return next();
+    users_model_1.User.findAll()
+        .then(users => {
+        res.json(users);
+        return next();
+    });
 });
 exports.default = routerInstance;
