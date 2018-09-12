@@ -23,6 +23,7 @@ export class Server {
                 });
 
                 this.application.use(restify.plugins.queryParser());
+                this.application.use(restify.plugins.bodyParser());
 
                 this.application.get('/hello', (req, resp, next) => {
                     resp.json({message: 'Hello', status: 'Ok'});
