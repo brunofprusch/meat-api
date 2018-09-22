@@ -68,4 +68,16 @@ routerInstance.path('/users/:id', (req, res, next) => {
         })
 })
 
+routerInstance.del('/users/:id', (req, res, next) => {
+
+    User.remove({_id: req.params.id}).exec()
+        .then((cmdResult: any) => {
+            if (cmdResult.result.n) {
+                res.send(204);
+            } else {
+                res.send(404);
+            }
+        })
+})
+
 export default routerInstance;
