@@ -1,6 +1,7 @@
 import * as restify from 'restify';
 import {environment} from '../common/environment';
 import * as mongoose from 'mongoose';
+import {mergePathBodyParser} from './merge-path.parser';
 
 export class Server {
 
@@ -24,6 +25,7 @@ export class Server {
 
                 this.application.use(restify.plugins.queryParser());
                 this.application.use(restify.plugins.bodyParser());
+                this.application.use(mergePathBodyParser);
 
                 this.application.get('/hello', (req, resp, next) => {
                     resp.json({message: 'Hello', status: 'Ok'});
