@@ -4,7 +4,8 @@
   "description": "API built on Node Udemy course with TypeScript",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
   },
   "author": "Bruno Feldmann Prusch",
   "license": "ISC",
@@ -15,6 +16,6 @@
   },
   "devDependencies": {
     "@types/mongoose": "4.7.32",
-    "@types/restify": "5.0.6"
+    "@types/restify": "7.2.4"
   }
 }

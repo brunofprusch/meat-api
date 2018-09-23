@@ -11,15 +11,17 @@ routerInstance.get('/users', (req, res, next) => {
     });
 });
 routerInstance.get('/users/:id', (req, res, next) => {
+    // User.findById(req.params.id)
+    //     .then(user => {
+    //         if (user) {
+    //             res.json(user);
+    //             return next();
+    //         }
+    //         res.send(404);
+    //         return next();
+    //     })
     users_model_1.User.findById(req.params.id)
-        .then(user => {
-        if (user) {
-            res.json(user);
-            return next();
-        }
-        res.send(404);
-        return next();
-    });
+        .then(render(res, next));
 });
 routerInstance.post('/users', (req, res, next) => {
     let user = new users_model_1.User(req.body);
@@ -42,6 +44,44 @@ routerInstance.put('/users/:id', (req, res, next) => {
             res.json(user);
             return next();
         });
+    })
+        .catch(error => {
+        res.send(404);
+        return next();
     });
 });
+routerInstance.patch('/users/:id', (req, res, next) => {
+    const options = { new: true };
+    users_model_1.User.findByIdAndUpdate(req.params.id, req.body, options)
+        .then(user => {
+        if (user) {
+            res.json(user);
+            return next();
+        }
+        res.send(404);
+        return next();
+    });
+});
+routerInstance.del('/users/:id', (req, res, next) => {
+    users_model_1.User.remove({ _id: req.params.id }).exec()
+        .then((cmdResult) => {
+        if (cmdResult.result.n) {
+            res.send(204);
+        }
+        else {
+            res.send(404);
+        }
+    });
+});
+function render(res, next) {
+    return (document) => {
+        if (document) {
+            res.json(document);
+            return next();
+        }
+        res.send(404);
+        return next();
+    };
+}
 exports.default = routerInstance;
+//# sourceMappingURL=users.router.js.map

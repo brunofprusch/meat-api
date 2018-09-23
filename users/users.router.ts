@@ -1,4 +1,5 @@
 import {Router} from 'restify-router';
+import * as restify from 'restify';
 const routerInstance = new Router();
 import {User} from './users.model';
 
@@ -13,15 +14,20 @@ routerInstance.get('/users', (req, res, next) => {
 
 routerInstance.get('/users/:id', (req, res, next) => {
     
+    // User.findById(req.params.id)
+    //     .then(user => {
+    //         if (user) {
+    //             res.json(user);
+    //             return next();
+    //         }
+    //         res.send(404);
+    //         return next();
+    //     })
+
     User.findById(req.params.id)
-        .then(user => {
-            if (user) {
-                res.json(user);
-                return next();
-            }
-            res.send(404);
-            return next();
-        })
+        .then(render(res, next))
+
+
 });
 
 routerInstance.post('/users', (req, res, next) => {
@@ -54,7 +60,7 @@ routerInstance.put('/users/:id', (req, res, next) => {
         })
 });
 
-routerInstance.path('/users/:id', (req, res, next) => {
+routerInstance.patch('/users/:id', (req, res, next) => {
     const options = {new: true}
     User.findByIdAndUpdate(req.params.id, req.body, options)
         .then(user => {
@@ -79,5 +85,17 @@ routerInstance.del('/users/:id', (req, res, next) => {
             }
         })
 })
+
+
+function render(res: restify.Response, next: restify.Next) {
+    return (document) => {
+        if (document) {
+            res.json(document);
+            return next();
+        }
+        res.send(404);
+        return next();
+        }
+    }
 
 export default routerInstance;

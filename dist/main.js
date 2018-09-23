@@ -12,3 +12,4 @@ server.bootstrap([users_router_1.default])
     console.log(error);
     process.exit(1);
 });
+//# sourceMappingURL=main.js.map
