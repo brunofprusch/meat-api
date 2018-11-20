@@ -10,24 +10,21 @@ routerInstance.get('/users', (req, res, next) => {
             res.json(users);
             return next();
         })
+        .catch(next);
 });
 
 routerInstance.get('/users/:id', (req, res, next) => {
     
-    // User.findById(req.params.id)
-    //     .then(user => {
-    //         if (user) {
-    //             res.json(user);
-    //             return next();
-    //         }
-    //         res.send(404);
-    //         return next();
-    //     })
-
     User.findById(req.params.id)
-        .then(render(res, next))
-
-
+        .then(user => {
+            if (user) {
+                res.json(user);
+                return next();
+            }
+            res.send(404);
+            return next();
+        })
+        .catch(next);
 });
 
 routerInstance.post('/users', (req, res, next) => {
@@ -40,6 +37,7 @@ routerInstance.post('/users', (req, res, next) => {
                     return next();
                 })
         })
+        .catch(next);
 });
 
 routerInstance.put('/users/:id', (req, res, next) => {
@@ -72,6 +70,7 @@ routerInstance.patch('/users/:id', (req, res, next) => {
             res.send(404);
             return next();
         })
+        .catch(next);
 })
 
 routerInstance.del('/users/:id', (req, res, next) => {
@@ -84,18 +83,19 @@ routerInstance.del('/users/:id', (req, res, next) => {
                 res.send(404);
             }
         })
+        .catch(next);
 })
 
 
-function render(res: restify.Response, next: restify.Next) {
-    return (document) => {
-        if (document) {
-            res.json(document);
-            return next();
-        }
-        res.send(404);
-        return next();
-        }
-    }
+// function render(res: restify.Response, next: restify.Next) {
+//     return (document) => {
+//         if (document) {
+//             res.json(document);
+//             return next();
+//         }
+//         res.send(404);
+//         return next();
+//         }
+//     }
 
 export default routerInstance;
